@@ -7,39 +7,32 @@ public class ImageDN {
 	private int[][] pixels;
 	private String[][] hexpistols;
 	private int maxX;
-	private int maxY;;
+	private int maxY;
 
 	public ImageDN(BufferedImage img) {
 		maxX = img.getWidth();
 		maxY = img.getHeight();
 		pixels = new int[maxY][maxX];
 		hexpistols = new String[maxY][maxX];
-		hexifier();
 		for (int i = 0; i < maxY; i++) {
 			for (int j = 0; j < maxX; j++) {
 				pixels[i][j] = img.getRGB(j,i);
 			}
 		}
-		System.out.println(pixels[50][50]);
-		System.out.println(hexpistols[50][50]);
-		System.out.println(maxX);
-		System.out.println(maxY);
+		hexifier();
 	}
 	
 	public void hexifier(){
 		Color pixel;
 		for (int row = 0; row < pixels.length; row++) {
 			for (int col = 0; col < pixels[row].length; col++ ){
-				pixel = pixels[row][col];
-				String s = String.format("#%02x%02x%02x", pixel.getRed(), pixel.getGreen(), pixel.getBlue());
-				hexpistols[row][col] = s;
+			    pixel = new Color(pixels[row][col]);
+			    String s = String.format("#%02x%02x%02x", pixel.getRed(), pixel.getGreen(), pixel.getBlue());
+			    hexpistols[row][col] = s;
 			}
 		}
 	}
-	//commenting this garbage out, because it is garbage LOL
-	//for real tho, it is initialized to the first thing i think 
-	// and shit don't change 
-	//it is 2 am i will just fix this tommorow in class 
+
 	public static void main(String[] args) {
 		BufferedImage b = null;
 		try {
