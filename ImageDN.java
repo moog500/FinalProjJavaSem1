@@ -34,6 +34,22 @@ public class ImageDN {
 	}
     }
 
+    public int[][] getPixels() {
+	return pixels;
+    }
+
+    public String[][] getHexPistols() {
+	return hexpistols;
+    }
+
+    public int getMaxX() {
+	return maxX;
+    }
+
+    public int getMaxY() {
+	return maxY;
+    }
+
     public void testColors(){
 	int x;
 	int y;
