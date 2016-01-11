@@ -26,7 +26,7 @@ public class ImageDN {
 		System.out.println(maxY);
 	}
 	
-	public void hexifier(){
+	'public void hexifier(){
 		for (int row = 0; row < pixels.length; row++) {
 			for (int col = 0; col < pixels[row].length; col++ ){
 				Color pixel = new Color(pixels[row][col]);
@@ -35,8 +35,11 @@ public class ImageDN {
 				hexpistols[row][col] = s;
 			}
 		}
-	}
-	
+	}'
+	//commenting this garbage out, because it is garbage LOL
+	//for real tho, it is initialized to the first thing i think 
+	// and shit don't change 
+	//it is 2 am i will just fix this tommorow in class 
 	public static void main(String[] args) {
 		BufferedImage b = null;
 		try {
