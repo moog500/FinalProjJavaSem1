@@ -7,7 +7,7 @@ public class ImageDN {
 	private int[][] pixels;
 	private String[][] hexpistols;
 	private int maxX;
-	private int maxY;
+	private int maxY;;
 
 	public ImageDN(BufferedImage img) {
 		maxX = img.getWidth();
@@ -26,16 +26,16 @@ public class ImageDN {
 		System.out.println(maxY);
 	}
 	
-	'public void hexifier(){
+	public void hexifier(){
+		Color pixel;
 		for (int row = 0; row < pixels.length; row++) {
 			for (int col = 0; col < pixels[row].length; col++ ){
-				Color pixel = new Color(pixels[row][col]);
+				pixel = pixels[row][col];
 				String s = String.format("#%02x%02x%02x", pixel.getRed(), pixel.getGreen(), pixel.getBlue());
-				pixel = Color.decode(s);
 				hexpistols[row][col] = s;
 			}
 		}
-	}'
+	}
 	//commenting this garbage out, because it is garbage LOL
 	//for real tho, it is initialized to the first thing i think 
 	// and shit don't change 
