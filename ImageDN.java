@@ -1,9 +1,10 @@
-import java.awt.image.*;
+import java.awt.*;
 import javax.imageio.*;
 import java.io.*;
 
 public class ImageDN {
     private int[][] pixels;
+    private String[][] hexpistols;
     private int maxX;
     private int maxY;
 
@@ -11,10 +12,21 @@ public class ImageDN {
 	maxX = img.getWidth();
 	maxY = img.getHeight();
 	pixels = new int[maxX][maxY];
+	ImageDN.hexifier();
 	for (int i = 0; i < maxX; i++) {
 	    for (int j = 0; j < maxY; j++) {
 		pixels[i][j] = img.getRGB(i,j);
 	    }
+	
+	}
+	public void hexifier(){
+		for (row : pixels) {
+			for (int i = 0; i < row.length; i++ ){
+				String s = String.format("#%02x%02x%02x", pixel.getRed(), pixel.getGreen(), pixel.getBlue());
+				Color pixel = Color.decode(s);
+				hexpistols[row][i] = s;
+			}
+		}
 	}
 	System.out.println(pixels[maxX-1][maxY-1]);
     }
