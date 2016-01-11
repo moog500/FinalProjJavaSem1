@@ -20,8 +20,10 @@ public class ImageDN {
 				pixels[i][j] = img.getRGB(j,i);
 			}
 		}
-		System.out.println(pixels[0][0]);
-		System.out.println(hexpistols[0][0]);
+		System.out.println(pixels[50][50]);
+		System.out.println(hexpistols[50][50]);
+		System.out.println(maxX);
+		System.out.println(maxY);
 	}
 	
 	public void hexifier(){
