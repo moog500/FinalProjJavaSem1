@@ -7,6 +7,7 @@ import java.util.*;
 public class ImageDN {
 	private int[][] pixels;
 	private String[][] hexpistols;
+	private Long[][] greypix;
 	private int maxX;
 	private int maxY;
 
@@ -63,13 +64,28 @@ public class ImageDN {
 			System.out.println();
 		}
 	}
-	
+	public void bwcheck(){
+		for (int row = 0; row < hexpistols.length; row++){
+			for (int col = 0; col< hexpistols[col].length; col++){
+				//gonna start dropping cites; http://stackoverflow.com/questions/7704377/unable-to-parse-argb-hex-to-integer
+				greypix[row][col] = Long.parseLong(hexpistols[row][col], 16);
+				if (greypix[row][col] - Long.parseLong()) {
+
+				}
+				//trynna figure the rest of this out, will commit and push for now, will work on it later
+
+
+			}
+		}
+	}
+
 	public void applyBorder(Border applied) {
 		ArrayList<Integer> pos = applied.getBorderPos();
 		for (int i = 0; i < pos.length; i+=2) {
 			hexpistols[i][i+1] = applied.color;
 		}
 	}
+
 
 	public static void main(String[] args) {
 		BufferedImage b = null;
