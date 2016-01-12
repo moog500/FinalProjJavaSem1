@@ -83,6 +83,13 @@ public class ImageDN {
 			}
 		}
 	}
+	public char toterminal(){
+		for (int row = 0; hexpistols.length; row++){
+			for (int col = 0; hexpistols[row].length; col++){
+				System.out.println(hexpistols[row][col]);
+			}
+		}
+	}
 
 	public void applyBorder(Border applied) {
 		ArrayList<Integer> pos = applied.getBorderPos();
