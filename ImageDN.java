@@ -3,11 +3,12 @@ import java.awt.image.*;
 import javax.imageio.*;
 import java.io.*;
 import java.util.*;
+import java.lang.*;
 
 public class ImageDN {
 	private int[][] pixels;
 	private String[][] hexpistols;
-	private Long[][] greypix;
+	private char[][] greypix;
 	private int maxX;
 	private int maxY;
 
@@ -68,10 +69,7 @@ public class ImageDN {
 		for (int row = 0; row < hexpistols.length; row++){
 			for (int col = 0; col< hexpistols[col].length; col++){
 				//gonna start dropping cites; http://stackoverflow.com/questions/7704377/unable-to-parse-argb-hex-to-integer
-				greypix[row][col] = Long.parseLong(hexpistols[row][col], 16);
-				if (greypix[row][col] - Long.parseLong()) {
-
-				}
+				if (hexpistols[row][col].//compareto would go here)
 				//trynna figure the rest of this out, will commit and push for now, will work on it later
 
 
