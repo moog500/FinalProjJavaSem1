@@ -69,8 +69,15 @@ public class ImageDN {
 		for (int row = 0; row < hexpistols.length; row++){
 			for (int col = 0; col< hexpistols[col].length; col++){
 				//gonna start dropping cites; http://stackoverflow.com/questions/7704377/unable-to-parse-argb-hex-to-integer
-				if (hexpistols[row][col].//compareto would go here)
+				Long tempdogo = Long.parseLong(hexpistols[row][col], 16);
+				if tempdogo - Long.parseLong('00000000', 16) > tempdogo -  Long.parseLong('000000', 16){
+					greypix[row][col] = ';';
+				}
+				else {
+					greypix[row][col] = '.';
+				}
 				//trynna figure the rest of this out, will commit and push for now, will work on it later
+
 
 
 			}
