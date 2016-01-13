@@ -80,6 +80,13 @@ public class ImageDN {
 	}
     }*/
 
+    /*public int[] hexToaRGB(String hex) {
+	int[] ret = new int[4];
+	ret[0] = hex.substring(0,2);
+	ret[1] = hexToBase10(hex.substring(3,5));
+	ret[2] = hexTo
+    }*/
+
     public void toterminal(){
 	for (int row = 0; row < hexpistols.length; row++){
 	    for (int col = 0; col < hexpistols[row].length; col++){
@@ -109,8 +116,9 @@ public class ImageDN {
 	}
 
 	ImageDN a = new ImageDN(b);
-	a.testColors();
-	    
+	//a.testColors();
+	
+    
 	BufferedImage brdr = null;
 	Border test = null;
 	try {
@@ -121,5 +129,8 @@ public class ImageDN {
 	}
 	test = new Border(brdr, "#000000");
 	a.applyBorder(test);
+
+	Color black = new Color(0);
+	System.out.println(black.getRGB());
     }
 }
