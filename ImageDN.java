@@ -30,7 +30,7 @@ public class ImageDN {
 	for (int row = 0; row < pixels.length; row++) {
 	    for (int col = 0; col < pixels[row].length; col++ ){
 		pixel = new Color(pixels[row][col]);
-		String s = String.format("#%02x%02x%02x", pixel.getRed(), pixel.getGreen(), pixel.getBlue());
+		String s = ("" + pixels[row][col]).substring(0,2) + String.format("#%02x%02x%02x", pixel.getRed(), pixel.getGreen(), pixel.getBlue());
 		hexpistols[row][col] = s;
 	    }
 	}
@@ -64,7 +64,6 @@ public class ImageDN {
 	    System.out.println("Hex: " + hexpistols[y][x]);
 	    System.out.println();
 	}
-<<<<<<< HEAD
     }
 
     /*public void bwcheck() {
@@ -75,35 +74,7 @@ public class ImageDN {
 		    Long tempdogo = Long.parseLong(hexpistols[row][col], 16);
 		    if tempdogo - Long.parseLong('00000000', 16) > tempdogo -  Long.parseLong('000000', 16){
 			    greypix[row][col] = ';';
-=======
-	public void bwcheck(){
-		for (int row = 0; row < hexpistols.length; row++){
-			for (int col = 0; col< hexpistols[col].length; col++){
-				//gonna start dropping cites; http://stackoverflow.com/questions/7704377/unable-to-parse-argb-hex-to-integer
-				Long tempdogo = Long.parseLong(hexpistols[row][col], 16);
-				if tempdogo - Long.parseLong('00000000', 16) > tempdogo -  Long.parseLong('000000', 16){
-					greypix[row][col] = ';';
-				}
-				else {
-					greypix[row][col] = '.';
-				}
-				//trynna figure the rest of this out, will commit and push for now, will work on it later
-
-
-
 			}
-		}
-	}
-	public char toterminal(){
-		for (int row = 0; hexpistols.length; row++){
-			for (int col = 0; hexpistols[row].length; col++){
-				System.out.println(hexpistols[row][col]);
->>>>>>> c66f2b71b1a0981b444304fb0ca7f72a85505f1f
-			}
-		    else {
-			greypix[row][col] = '.';
-		    }
-		    //trynna figure the rest of this out, will commit and push for now, will work on it later
 		    }
 	    }
 	}
@@ -138,6 +109,7 @@ public class ImageDN {
 	}
 
 	ImageDN a = new ImageDN(b);
+	a.testColors();
 	    
 	BufferedImage brdr = null;
 	Border test = null;
