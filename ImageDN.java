@@ -23,7 +23,39 @@ public class ImageDN {
 	for (int i = 0; i < maxY; i++) {
 	    for (int j = 0; j < maxX; j++) {
 	        c = new Color(img.getRGB(j,i));
-		pixels[i][j] = ""+(c.getRed())+(c.getGreen())+(c.getBlue());
+		String[] colors = new String[3];
+
+		if ((""+c.getRed()).length() == 1) {
+		    colors[0] = "00"+c.getRed();
+		}
+		if ((""+c.getRed()).length() == 2) {
+		    colors[0] = "0"+c.getRed();
+		}
+		if ((""+c.getRed()).length() == 3) {
+		    colors[0] = ""+c.getRed();
+		}
+
+		if ((""+c.getGreen()).length() == 1) {
+		    colors[1] = "00"+c.getGreen();
+		}
+		if ((""+c.getGreen()).length() == 2) {
+		    colors[1] = "0"+c.getGreen();
+		}
+		if ((""+c.getGreen()).length() == 3) {
+		    colors[1] = ""+c.getGreen();
+		}
+
+		if ((""+c.getBlue()).length() == 1) {
+		    colors[2] = "00"+c.getBlue();
+		}
+		if ((""+c.getBlue()).length() == 2) {
+		    colors[2] = "0"+c.getBlue();
+		}
+		if ((""+c.getBlue()).length() == 3) {
+		    colors[2] = ""+c.getBlue();
+		}
+
+		pixels[i][j] = colors[0]+colors[1]+colors[2];
 	    }
 	}
     }
@@ -92,5 +124,14 @@ public class ImageDN {
 	}
 	test = new Border(brdr, "000000000");
 	a.applyBorder(test);
+
+	try {
+	    String s = String.format("%s.png","test");
+	    File output = new File(s);
+	    ImageIO.write(a.getImage(),"png",output);
+	}
+	catch (IOException e) {
+	    System.out.println("test3");
+	}
     }
 }
