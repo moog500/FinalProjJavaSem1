@@ -19,19 +19,7 @@ public class ImageDN {
 	hexpistols = new String[maxY][maxX];
 	for (int i = 0; i < maxY; i++) {
 	    for (int j = 0; j < maxX; j++) {
-		pixels[i][j] = img.getRGB(j,i);
-	    }
-	}
-	hexifier();
-    }
-	
-    public void hexifier(){
-	Color pixel;
-	for (int row = 0; row < pixels.length; row++) {
-	    for (int col = 0; col < pixels[row].length; col++ ){
-		pixel = new Color(pixels[row][col]);
-		String s = ("" + pixels[row][col]).substring(0,2) + String.format("#%02x%02x%02x", pixel.getRed(), pixel.getGreen(), pixel.getBlue());
-		hexpistols[row][col] = s;
+		pixels[i][j] = ""+img.getRed(j,i)+img.getGreen(j,i)+img.getBlue(j,i);
 	    }
 	}
     }
@@ -63,35 +51,6 @@ public class ImageDN {
 	    System.out.println("aRGB: " + pixels[y][x]);
 	    System.out.println("Hex: " + hexpistols[y][x]);
 	    System.out.println();
-	}
-    }
-
-    /*public void bwcheck() {
-	for (int row = 0; row < hexpistols.length; row++){
-	    for (int col = 0; col< hexpistols[col].length; col++){
-		//gonna start dropping cites; http://stackoverflow.com/questions/7704377/unable-to-parse-argb-hex-to-integer
-		if (hexpistols[row][col].//compareto would go here)
-		    Long tempdogo = Long.parseLong(hexpistols[row][col], 16);
-		    if tempdogo - Long.parseLong('00000000', 16) > tempdogo -  Long.parseLong('000000', 16){
-			    greypix[row][col] = ';';
-			}
-		    }
-	    }
-	}
-    }*/
-
-    /*public int[] hexToaRGB(String hex) {
-	int[] ret = new int[4];
-	ret[0] = hex.substring(0,2);
-	ret[1] = hexToBase10(hex.substring(3,5));
-	ret[2] = hexTo
-    }*/
-
-    public void toterminal(){
-	for (int row = 0; row < hexpistols.length; row++){
-	    for (int col = 0; col < hexpistols[row].length; col++){
-		System.out.println(hexpistols[row][col]);
-	    }
 	}
     }
 
