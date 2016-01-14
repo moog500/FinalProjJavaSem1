@@ -6,30 +6,30 @@ import java.util.*;
 import java.lang.*;
 
 public class ImageDN {
-    private int[][] pixels;
+    private String[][] pixels;
     private String[][] hexpistols;
     private char[][] greypix;
     private int maxX;
     private int maxY;
+    private BufferedImage img;
 
     public ImageDN(BufferedImage img) {
+	this.img = img;
 	maxX = img.getWidth();
 	maxY = img.getHeight();
-	pixels = new int[maxY][maxX];
+	pixels = new String[maxY][maxX];
 	hexpistols = new String[maxY][maxX];
+	Color c;
 	for (int i = 0; i < maxY; i++) {
 	    for (int j = 0; j < maxX; j++) {
-		pixels[i][j] = ""+img.getRed(j,i)+img.getGreen(j,i)+img.getBlue(j,i);
+	        c = new Color(img.getRGB(j,i));
+		pixels[i][j] = ""+(c.getRed())+(c.getGreen())+(c.getBlue());
 	    }
 	}
     }
 
-    public int[][] getPixels() {
+    public String[][] getPixels() {
 	return pixels;
-    }
-
-    public String[][] getHexPistols() {
-	return hexpistols;
     }
 
     public int getMaxX() {
@@ -38,6 +38,10 @@ public class ImageDN {
 
     public int getMaxY() {
 	return maxY;
+    }
+
+    public BufferedImage getImage() {
+	return img;
     }
 
     public void testColors(){
@@ -57,7 +61,7 @@ public class ImageDN {
     public void applyBorder(Border applied) {
 	ArrayList<Integer> pos = applied.getBorderPos();
 	for (int i = 0; i < pos.size(); i+=2) {
-	    hexpistols[pos.get(i)][pos.get(i+1)] = applied.getColor();
+	    img.setRGB(pos.get(i),pos.get(i+1),applied.getImage().getRGB((int)pos.get(i),(int)pos.get(i+1)));
 	}
     }
 
@@ -86,10 +90,7 @@ public class ImageDN {
 	catch (IOException e) {
 	    System.out.println("test2");
 	}
-	test = new Border(brdr, "#000000");
+	test = new Border(brdr, "000000000");
 	a.applyBorder(test);
-
-	Color black = new Color(0);
-	System.out.println(black.getRGB());
     }
 }
