@@ -30,7 +30,7 @@ public class ImageDN {
 					for (int b = 0; b < 3-(""+c.getRed()).length(); j++) {
 						s += "0";
 					}
-					colors[i] = s;
+					colors[a] = s;
 				}
 				pixels[i][j] = colors[0]+colors[1]+colors[2];
 			}
@@ -69,46 +69,54 @@ public class ImageDN {
 
 	public void applyBorder(Border applied) {
 		ArrayList<Integer> pos = applied.getBorderPos();
+		int posX;
+		int posY;
+		int valX;
+		int valY;
 		for (int i = 0; i < pos.size(); i+=2) {
-			img.setRGB(pos.get(i),pos.get(i+1),applied.getImage().getRGB((int)pos.get(i),(int)pos.get(i+1)));
+			posX = pos.get(i);
+			posY = pos.get(i+1);
+			valX = (int)pos.get(i);
+			valY = (int)pos.get(i+1);
+			img.setRGB(posX,posY,applied.getImage().getRGB(valX,valY));
 		}
 	}
 
-	public void outputImage() {
-		
+	public void outputImage(String filename, String extension) {
+		try {
+			String s = filename+extension;
+			File output = new File(s);
+			ImageIO.write(img, extension, output);
+		}
+		catch (IOException e) {
+			System.out.println("Input/Output error. Please check that you have entered the correct parameters and try again.");
+		}
 	}
 
 	public static void main(String[] args) {
 		BufferedImage b = null;
 		try {
-			b = ImageIO.read(new File("test2.jpg"));
+			b = ImageIO.read(new File("whiteimage200x200.png"));
 		}
 		catch (IOException e) {
-			System.out.println("test");
+			System.out.println("IOException1");
 		}
-
 		ImageDN a = new ImageDN(b);
-		//a.testColors();
 		
 		
 		BufferedImage brdr = null;
 		Border test = null;
 		try {
-			brdr = ImageIO.read(new File("test_border.png"));
+			brdr = ImageIO.read(new File("blackborder200x200.jpg"));
 		}
 		catch (IOException e) {
-			System.out.println("test2");
+			System.out.println("IOException2");
 		}
 		test = new Border(brdr, "000000000");
+		
 		a.applyBorder(test);
 
-		try {
-			String s = String.format("%s.png","test");
-			File output = new File(s);
-			ImageIO.write(a.getImage(),"png",output);
-		}
-		catch (IOException e) {
-			System.out.println("test3");
-		}
+		
+		a.outputImage("whiteimageblackborder200x200","jpg");
 	}
 }
