@@ -26,9 +26,9 @@ public class ImageDN {
 			for (int j = 0; j < maxX; j++) {
 				c = new Color(img.getRGB(j,i));
 				String[] colors = new String[3];
-				s = "";
-				get = "";
 				for (int a = 0; a < 3; a++) {
+					s = "";
+					get = "";
 					if (a == 0) {
 						get = ""+c.getRed();
 					}
@@ -41,6 +41,7 @@ public class ImageDN {
 					for (int b = 0; b < 3-(get).length(); b++) {
 						s += "0";
 					}
+					s += get;
 					colors[a] = s;
 				}
 				pixels[i][j] = colors[0]+colors[1]+colors[2];
