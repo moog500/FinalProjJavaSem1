@@ -9,9 +9,15 @@ public class Border extends ImageDN {
 	super(brdr);
 	this.color = color;
 	borderPos = new ArrayList<Integer>();
+	int r;
+	int g;
+	int b;
 	for (int row = 0; row < getPixels().length; row++) {
 	    for (int col = 0; col < getPixels()[row].length; col++) {
-		if (getPixels()[row][col].equals("000000000")) {
+		r = Integer.parseInt(getPixels()[row][col].substring(0,3));
+		g = Integer.parseInt(getPixels()[row][col].substring(3,6));
+	        b = Integer.parseInt(getPixels()[row][col].substring(6,9));
+		if (r < 10 && g < 10 && b < 10) {
 		    borderPos.add(row);
 		    borderPos.add(col);
 		}
