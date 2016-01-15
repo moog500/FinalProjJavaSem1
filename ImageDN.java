@@ -21,13 +21,24 @@ public class ImageDN {
 		hexpistols = new String[maxY][maxX];
 		Color c;
 		String s;
+		String get;
 		for (int i = 0; i < maxY; i++) {
 			for (int j = 0; j < maxX; j++) {
 				c = new Color(img.getRGB(j,i));
 				String[] colors = new String[3];
 				s = "";
-				for (int a = 0; a < 3; i++) {
-					for (int b = 0; b < 3-(""+c.getRed()).length(); j++) {
+				get = "";
+				for (int a = 0; a < 3; a++) {
+					if (a == 0) {
+						get = ""+c.getRed();
+					}
+					if (a == 1) {
+						get = ""+c.getGreen();
+					}
+					if (a == 2) {
+						get = ""+c.getBlue();
+					}
+					for (int b = 0; b < 3-(get).length(); b++) {
 						s += "0";
 					}
 					colors[a] = s;
@@ -84,7 +95,7 @@ public class ImageDN {
 
 	public void outputImage(String filename, String extension) {
 		try {
-			String s = filename+extension;
+			String s = filename+"."+extension;
 			File output = new File(s);
 			ImageIO.write(img, extension, output);
 		}
