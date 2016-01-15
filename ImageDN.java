@@ -89,10 +89,10 @@ public class ImageDN {
 	int valX;
 	int valY;
 	for (int i = 0; i < pos.size(); i+=2) {
-	    posX = pos.get(i);
-	    posY = pos.get(i+1);
-	    valX = (int)pos.get(i);
-	    valY = (int)pos.get(i+1);
+	    posY = pos.get(i);
+	    posX = pos.get(i+1);
+	    valY = (int)pos.get(i);
+	    valX = (int)pos.get(i+1);
 	    img.setRGB(posX,posY,applied.getImage().getRGB(valX,valY));
 	}
     }
@@ -111,7 +111,7 @@ public class ImageDN {
     public static void main(String[] args) {
 	BufferedImage b = null;
 	try {
-	    b = ImageIO.read(new File("whiteimage200x200.png"));
+	    b = ImageIO.read(new File("test.jpg"));
 	}
 	catch (IOException e) {
 	    System.out.println("IOException1");
