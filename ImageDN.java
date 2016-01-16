@@ -70,32 +70,32 @@ public class ImageDN {
     public int TointRgb{
     	for (int row; row < maxY; row++){
     		for (int col; col < maxX; col++){
-    			String toBeconv = getblue(row,col) + getgreen(row,col) + getred(row,col) + getalpha(row,col);
-    			int toBeconvint = Integer.parseint(toBeconv);
-    			
+    			Color toBeconv = new Color(getblue(row,col),getgreen(row,col),getred(row,col),getalpha(row,col))
+    			pixels[row][col] = toBeconv;
+
     	}
     	 
     		
     }
-    public String getalpha(int row, int col){
-    	String a = pixels[row][col].substring(9,12);
+    public int getalpha(int row, int col){
+    	int a = Integer.parseint(pixels[row][col].substring(9,12));
     	return a;
     }
-    public String getred(int row, int col) {
-    	String r = pixels[row][col].substring(0,3);
+    public int getred(int row, int col) {
+    	int r = Integer.parseint(pixels[row][col].substring(0,3));
     	return r;
     }
-    public String getgreen(int row, int col){
-    	String g = pixels[row][col].substring(3,6);
+    public int getgreen(int row, int col){
+    	int g = Integer.parseint(pixels[row][col].substring(3,6));
     	return g;
     }
-	public String getblue(int row, int col){
-    	String b = pixels[row][col].substring(6,9);
+	public int getblue(int row, int col){
+    	int b = Integer.parseint(pixels[row][col].substring(6,9));
     	return b;
     }
 
 
-    public int TointRgb
+    
 
     public void testColors(){
 	int x;
