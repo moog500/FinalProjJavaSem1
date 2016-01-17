@@ -136,19 +136,19 @@ public class ImageDN {
 		int a;
 		Color c;
 		if (mood.equals("happy")) {
-			rChange = 5;
-			gChange = -5;
-			bChange = -5;
+			rChange = 20;
+			gChange = -20;
+			bChange = -20;
 		}
 		if (mood.equals("sad")) {
-			rChange = -5;
-			gChange = -5;
-			bChange = 5;
+			rChange = -20;
+			gChange = -20;
+			bChange = 20;
 		}
 		if (mood.equals("mad")) {
-			rChange = -5;
-			gChange = 5;
-			bChange = -5;
+			rChange = -20;
+			gChange = 20;
+			bChange = -20;
 		}
 		
 		for (int row = 0; row < maxY; row++) {
@@ -194,6 +194,7 @@ public class ImageDN {
 	}
 
 	public static void main(String[] args) {
+		//Testing Border
 		BufferedImage b = null;
 		try {
 			b = ImageIO.read(new File("whiteimage200x200.png"));
@@ -202,7 +203,6 @@ public class ImageDN {
 			System.out.println("IOException1");
 		}
 		ImageDN a = new ImageDN(b);
-		
 		
 		BufferedImage brdr = null;
 		Border test = null;
@@ -216,5 +216,43 @@ public class ImageDN {
 		
 		a.applyBorder(test);
 		a.outputImage("whiteimageblackborder200x200","jpg");
+		
+		//Tesing Mood
+		//Happy
+		BufferedImage bHappy = null;
+		try {
+			bHappy = ImageIO.read(new File("test.jpg"));
+		}
+		catch (IOException e) {
+			System.out.println("IOException3");
+		}
+		ImageDN aHappy = new ImageDN(bHappy);
+		
+		aHappy.applyMood("happy");
+		aHappy.outputImage("happytest","jpg");
+		//Sad
+		BufferedImage bSad = null;
+		try {
+			bSad = ImageIO.read(new File("test.jpg"));
+		}
+		catch (IOException e) {
+			System.out.println("IOException3");
+		}
+		ImageDN aSad = new ImageDN(bSad);
+		
+		aSad.applyMood("sad");
+		aSad.outputImage("sadtest","jpg");
+		//Mad
+		BufferedImage bMad = null;
+		try {
+			bMad = ImageIO.read(new File("test.jpg"));
+		}
+		catch (IOException e) {
+			System.out.println("IOException3");
+		}
+		ImageDN aMad = new ImageDN(bMad);
+		
+		aMad.applyMood("mad");
+		aMad.outputImage("madtest","jpg");
 	}
 }
