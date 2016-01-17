@@ -13,6 +13,9 @@ public class ImageDN {
 	private int maxY;
 	private BufferedImage img;
 
+	/*Takes a BufferedImage to create an ImageDN that can be modified
+	@param img is the BufferedImage created in the Driver that will be converted to an ImageDN
+	*/
 	public ImageDN(BufferedImage img) {
 		this.img = img;
 		maxX = img.getWidth();
@@ -50,24 +53,11 @@ public class ImageDN {
 				pixels[i][j] = colors[0]+colors[1]+colors[2]+colors[3];
 			}
 		}
+		toTYPE_INT_ARGB();
 	}
 
-	public String[][] getPixels() {
-		return pixels;
-	}
-
-	public int getMaxX() {
-		return maxX;
-	}
-
-	public int getMaxY() {
-		return maxY;
-	}
-
-	public BufferedImage getImage() {
-		return img;
-	}
-	
+	/*Creates the pixelsARGB array
+	*/
 	public void toTYPE_INT_ARGB(){
 		int r;
 		int g;
@@ -84,7 +74,40 @@ public class ImageDN {
 			}
 		}
 	}
+	
+	/*Returns the array of pixels in the format RRRGGGBBBAAA
+	*/
+	public String[][] getPixels() {
+		return pixels;
+	}
 
+	/*Returns the array of pixels in the format TYPE_INT_ARGB
+	*/
+	public int[][] getPixelsARGB() {
+		return pixelsARGB;
+	}
+	
+	/*Returns the MaxX value
+	*/
+	public int getMaxX() {
+		return maxX;
+	}
+
+	/*Returns the MaxY value
+	*/
+	public int getMaxY() {
+		return maxY;
+	}
+
+	/*Returns the image to be modified
+	*/
+	public BufferedImage getImage() {
+		return img;
+	}
+	
+	/*Applies the specified border to the image
+	@param applied is the border to be applied to the image
+	*/
 	public void applyBorder(Border applied) {
 		ArrayList<Integer> pos = applied.getBorderPos();
 		int posX;
@@ -100,6 +123,10 @@ public class ImageDN {
 		}
 	}
 
+	/*Creates a new file from the current, modified image with the specified name and extension
+	@param filename is the name of the file (without the extension)
+	@param extension is the extension to be used (without the period - e.g. jpg, png, etc)
+	*/
 	public void outputImage(String filename, String extension) {
 		try {
 			String s = filename+"."+extension;
