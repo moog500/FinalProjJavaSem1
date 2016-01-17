@@ -122,6 +122,61 @@ public class ImageDN {
 			img.setRGB(posX,posY,applied.getImage().getRGB(valX,valY));
 		}
 	}
+	
+	/*Applies the specified mood to the image
+	@param mood is the mood to be applied to the image
+	*/
+	public void applyMood(String mood) {
+		int rChange = 0;
+		int gChange = 0;
+		int bChange = 0;
+		int r;
+		int g;
+		int b;
+		int a;
+		Color c;
+		if (mood.equals("happy")) {
+			rChange = 5;
+			gChange = -5;
+			bChange = -5;
+		}
+		if (mood.equals("sad")) {
+			rChange = -5;
+			gChange = -5;
+			bChange = 5;
+		}
+		if (mood.equals("mad")) {
+			rChange = -5;
+			gChange = 5;
+			bChange = -5;
+		}
+		
+		for (int row = 0; row < maxY; row++) {
+			for (int col = 0; col < maxX; col++) {
+				r = fixBounds(Integer.parseInt(pixels[row][col].substring(0,3))+rChange);
+				g = fixBounds(Integer.parseInt(pixels[row][col].substring(3,6))+gChange);
+				b = fixBounds(Integer.parseInt(pixels[row][col].substring(6,9))+bChange);
+				a = Integer.parseInt(pixels[row][col].substring(9,12));
+				c = new Color(r,g,b,a);
+				img.setRGB(col,row,c.getRGB());
+			}
+		}
+	}
+	
+	/*Takes any number that may be outside the (0,255) range and puts it back in that range
+	@param toFix is the number that needs to placed in the range
+	*/
+	public int fixBounds(int toFix) {
+		if (toFix > 255) {
+			return 255;
+		}
+		else if (toFix < 0) {
+			return 0;
+		}
+		else {
+			return toFix;
+		}
+	}
 
 	/*Creates a new file from the current, modified image with the specified name and extension
 	@param filename is the name of the file (without the extension)
@@ -141,7 +196,7 @@ public class ImageDN {
 	public static void main(String[] args) {
 		BufferedImage b = null;
 		try {
-			b = ImageIO.read(new File("test.jpg"));
+			b = ImageIO.read(new File("whiteimage200x200.png"));
 		}
 		catch (IOException e) {
 			System.out.println("IOException1");
@@ -160,8 +215,6 @@ public class ImageDN {
 		test = new Border(brdr, "000000000");
 		
 		a.applyBorder(test);
-
-		
 		a.outputImage("whiteimageblackborder200x200","jpg");
 	}
 }
