@@ -111,6 +111,42 @@ public class ImageDN {
 		return img;
 	}
 	
+	/*Returns the red component of a pixel's colors
+	@param x is the x value of the pixel
+	@param y is the y value of the pixel
+	@return the red component of the pixel's color
+	*/
+	public int getR(int y, int x) {
+		return Integer.parseInt(pixels[y][x].substring(0,3))
+	}
+	
+	/*Returns the green component of a pixel's colors
+	@param x is the x value of the pixel
+	@param y is the y value of the pixel
+	@return the green component of the pixel's color
+	*/
+	public int getG(int y, int x) {
+		return Integer.parseInt(pixels[y][x].substring(3,6))
+	}
+	
+	/*Returns the blue component of a pixel's colors
+	@param x is the x value of the pixel
+	@param y is the y value of the pixel
+	@return the blue component of the pixel's color
+	*/
+	public int getB(int y, int x) {
+		return Integer.parseInt(pixels[y][x].substring(6,9))
+	}
+	
+	/*Returns the alpha component of a pixel's colors
+	@param x is the x value of the pixel
+	@param y is the y value of the pixel
+	@return the alpha component of the pixel's color
+	*/
+	public int getA(int y, int x) {
+		return Integer.parseInt(pixels[y][x].substring(9,12))
+	}
+	
 	/*Returns a scaled version of an image
 	@param input is the image to be scaled
 	@param newWidth is the new width of the image
@@ -148,6 +184,11 @@ public class ImageDN {
 		int posY;
 		int valX;
 		int valY;
+		int r;
+		int g;
+		int b;
+		int a;
+		Color c;
 		for (int i = 0; i < pos.size(); i+=2) {
 			posY = pos.get(i);
 			posX = pos.get(i+1);
@@ -187,10 +228,10 @@ public class ImageDN {
 		
 		for (int row = 0; row < maxY; row++) {
 			for (int col = 0; col < maxX; col++) {
-				r = fixBounds(Integer.parseInt(pixels[row][col].substring(0,3))+rChange);
-				g = fixBounds(Integer.parseInt(pixels[row][col].substring(3,6))+gChange);
-				b = fixBounds(Integer.parseInt(pixels[row][col].substring(6,9))+bChange);
-				a = Integer.parseInt(pixels[row][col].substring(9,12));
+				r = fixBounds(getR(row,col)+rChange);
+				g = fixBounds(getG(row,col)+gChange);
+				b = fixBounds(getB(row,col)+bChange);
+				a = getA();
 				c = new Color(r,g,b,a);
 				img.setRGB(col,row,c.getRGB());
 			}
@@ -208,10 +249,10 @@ public class ImageDN {
 		Color c;
 		for (int row = 0; row < maxY; row++) {
 			for (int col = 0; col < maxX; col++) {
-				r = Integer.parseInt(pixels[row][col].substring(0,3));
-				g = Integer.parseInt(pixels[row][col].substring(3,6));
-				b = Integer.parseInt(pixels[row][col].substring(6,9));
-				a = percentage;
+				r = getR(row,col);
+				g = getG(row,col);
+				b = getB(row,col);
+				a = (int)(percentage*255.0/100.0);
 				c = new Color(r,g,b,a);
 				img.setRGB(col,row,c.getRGB());
 			}
