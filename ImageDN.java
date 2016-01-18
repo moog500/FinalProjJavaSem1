@@ -66,10 +66,10 @@ public class ImageDN {
 		int a;
 		for (int row = 0; row < maxY; row++){
 			for (int col = 0; col < maxX; col++){
-				r = Integer.parseInt(pixels[row][col].substring(0,3));
-				g = Integer.parseInt(pixels[row][col].substring(3,6));
-				b = Integer.parseInt(pixels[row][col].substring(6,9));
-				a = Integer.parseInt(pixels[row][col].substring(9,12));
+				r = getR(row,col);
+				g = getG(row,col);
+				b = getB(row,col);
+				a = getA(row,col);
 				Color conv = new Color(r,g,b,a);
 				pixelsARGB[row][col] = conv.getRGB();
 			}
@@ -117,7 +117,7 @@ public class ImageDN {
 	@return the red component of the pixel's color
 	*/
 	public int getR(int y, int x) {
-		return Integer.parseInt(pixels[y][x].substring(0,3))
+		return Integer.parseInt(pixels[y][x].substring(0,3));
 	}
 	
 	/*Returns the green component of a pixel's colors
@@ -126,7 +126,7 @@ public class ImageDN {
 	@return the green component of the pixel's color
 	*/
 	public int getG(int y, int x) {
-		return Integer.parseInt(pixels[y][x].substring(3,6))
+		return Integer.parseInt(pixels[y][x].substring(3,6));
 	}
 	
 	/*Returns the blue component of a pixel's colors
@@ -135,7 +135,7 @@ public class ImageDN {
 	@return the blue component of the pixel's color
 	*/
 	public int getB(int y, int x) {
-		return Integer.parseInt(pixels[y][x].substring(6,9))
+		return Integer.parseInt(pixels[y][x].substring(6,9));
 	}
 	
 	/*Returns the alpha component of a pixel's colors
@@ -144,7 +144,7 @@ public class ImageDN {
 	@return the alpha component of the pixel's color
 	*/
 	public int getA(int y, int x) {
-		return Integer.parseInt(pixels[y][x].substring(9,12))
+		return Integer.parseInt(pixels[y][x].substring(9,12));
 	}
 	
 	/*Returns a scaled version of an image
@@ -231,7 +231,7 @@ public class ImageDN {
 				r = fixBounds(getR(row,col)+rChange);
 				g = fixBounds(getG(row,col)+gChange);
 				b = fixBounds(getB(row,col)+bChange);
-				a = getA();
+				a = getA(row,col);
 				c = new Color(r,g,b,a);
 				img.setRGB(col,row,c.getRGB());
 			}
@@ -291,7 +291,6 @@ public class ImageDN {
 	}
 
 	public static void main(String[] args) {
-		/*
 		//Testing Border
 		BufferedImage b = null;
 		try {
@@ -378,6 +377,5 @@ public class ImageDN {
 		
 		aTransparency.applyTransparency(0);
 		aTransparency.outputImage("transparencyTest","jpg");
-		*/
 	}
 }

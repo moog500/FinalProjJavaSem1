@@ -1,5 +1,10 @@
-import java.util.*;
+import java.awt.*;
 import java.awt.image.*;
+import java.awt.geom.*;
+import javax.imageio.*;
+import java.io.*;
+import java.util.*;
+import java.lang.*;
 
 public class Border extends ImageDN {
     private ArrayList<Integer> borderPos;
