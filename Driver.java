@@ -32,7 +32,10 @@ public class Driver {
 		//Moods
 		else if (args[1].equals("m")) {
 			try {
-				
+				bIn = ImageIO.read(new File(args[0]));
+				ImageDN in = new ImageDN(bIn);
+				in.applyMood(args[2]);
+				in.outputImage(args[3],args[4]);
 			}
 			catch (Exception e) {
 				System.out.println("Please read the README for instructions!");
