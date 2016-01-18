@@ -77,30 +77,35 @@ public class ImageDN {
 	}
 	
 	/*Returns the array of pixels in the format RRRGGGBBBAAA
+	@return the array of pixels in the format RRRGGGBBBAAA
 	*/
 	public String[][] getPixels() {
 		return pixels;
 	}
 
 	/*Returns the array of pixels in the format TYPE_INT_ARGB
+	@return the array of pixels in the format TYPE_INT_ARGB
 	*/
 	public int[][] getPixelsARGB() {
 		return pixelsARGB;
 	}
 	
 	/*Returns the MaxX value
+	@return the number of pixels in the X direction
 	*/
 	public int getMaxX() {
 		return maxX;
 	}
 
 	/*Returns the MaxY value
+	@return the number of pixels in the Y direction
 	*/
 	public int getMaxY() {
 		return maxY;
 	}
 
 	/*Returns the image to be modified
+	@return the BufferedImage that created the ImageDN
 	*/
 	public BufferedImage getImage() {
 		return img;
@@ -110,6 +115,7 @@ public class ImageDN {
 	@param input is the image to be scaled
 	@param newWidth is the new width of the image
 	@param newHeight is the new height of the image
+	@return the new scaled BufferedImage
 	*/
 	public static BufferedImage scale(BufferedImage input, int newWidth, int newHeight) {
 		int currentWidth = input.getWidth();
@@ -126,6 +132,7 @@ public class ImageDN {
 	/*Scales the image
 	@param newWidth is the new width of the image
 	@param newHeight is the new height of the image
+	@return the new scaled ImageDN
 	*/
 	public ImageDN scale1(int newWidth, int newHeight) {
 		ImageDN ret = new ImageDN(scale(img,newWidth,newHeight));
@@ -190,8 +197,30 @@ public class ImageDN {
 		}
 	}
 	
+	/*Applies the specified transparency to the image from 0 (transparent) to 255 (opaque)
+	@param percentage is the transparency % from 0 to 100 to be applied
+	*/
+	public void applyTransparency(int percentage) {
+		int r;
+		int g;
+		int b;
+		int a;
+		Color c;
+		for (int row = 0; row < maxY; row++) {
+			for (int col = 0; col < maxX; col++) {
+				r = Integer.parseInt(pixels[row][col].substring(0,3));
+				g = Integer.parseInt(pixels[row][col].substring(3,6));
+				b = Integer.parseInt(pixels[row][col].substring(6,9));
+				a = percentage;
+				c = new Color(r,g,b,a);
+				img.setRGB(col,row,c.getRGB());
+			}
+		}
+	}
+	
 	/*Takes any number that may be outside the (0,255) range and puts it back in that range
 	@param toFix is the number that needs to placed in the range
+	@return the new int in the range (0,255)
 	*/
 	public int fixBounds(int toFix) {
 		if (toFix > 255) {
@@ -204,8 +233,6 @@ public class ImageDN {
 			return toFix;
 		}
 	}
-	
-	
 
 	/*Creates a new file from the current, modified image with the specified name and extension
 	@param filename is the name of the file (without the extension)
@@ -284,7 +311,7 @@ public class ImageDN {
 		aMad.applyMood("mad");
 		aMad.outputImage("madtest","jpg");
 		
-		//Tesing Scaling
+		//Testing Scaling
 		BufferedImage bScale = null;
 		try {
 			bScale = ImageIO.read(new File("beforeScale.jpg"));
@@ -296,5 +323,18 @@ public class ImageDN {
 		ImageDN aScale = aBeforeScale.scale1(200,200);
 		
 		aScale.outputImage("afterScale","jpg");
+		
+		//Testing Transparency
+		BufferedImage bTransparency = null;
+		try {
+			bTransparency = ImageIO.read(new File("test.jpg"));
+		}
+		catch (IOException e) {
+			System.out.println("IOException6");
+		}
+		ImageDN aTransparency = new ImageDN(bTransparency);
+		
+		aTransparency.applyTransparency(0);
+		aTransparency.outputImage("transparencyTest","jpg");
 	}
 }
