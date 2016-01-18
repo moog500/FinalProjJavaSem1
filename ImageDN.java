@@ -250,6 +250,7 @@ public class ImageDN {
 	}
 
 	public static void main(String[] args) {
+		/*
 		//Testing Border
 		BufferedImage b = null;
 		try {
@@ -336,5 +337,6 @@ public class ImageDN {
 		
 		aTransparency.applyTransparency(0);
 		aTransparency.outputImage("transparencyTest","jpg");
+		*/
 	}
 }
