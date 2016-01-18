@@ -127,8 +127,8 @@ public class ImageDN {
 	@param newWidth is the new width of the image
 	@param newHeight is the new height of the image
 	*/
-	public ImageDN scale(int newWidth, int newHeight) {
-		ImageDN ret = new ImageDN(scale(img),newWidth,newHeight);
+	public ImageDN scale1(int newWidth, int newHeight) {
+		ImageDN ret = new ImageDN(scale(img,newWidth,newHeight));
 		return ret;
 	}
 	
@@ -265,7 +265,7 @@ public class ImageDN {
 			bSad = ImageIO.read(new File("test.jpg"));
 		}
 		catch (IOException e) {
-			System.out.println("IOException3");
+			System.out.println("IOException4");
 		}
 		ImageDN aSad = new ImageDN(bSad);
 		
@@ -277,11 +277,24 @@ public class ImageDN {
 			bMad = ImageIO.read(new File("test.jpg"));
 		}
 		catch (IOException e) {
-			System.out.println("IOException3");
+			System.out.println("IOException5");
 		}
 		ImageDN aMad = new ImageDN(bMad);
 		
 		aMad.applyMood("mad");
 		aMad.outputImage("madtest","jpg");
+		
+		//Tesing Scaling
+		BufferedImage bScale = null;
+		try {
+			bScale = ImageIO.read(new File("beforeScale.jpg"));
+		}
+		catch (IOException e) {
+			System.out.println("IOException6");
+		}
+		ImageDN aBeforeScale = new ImageDN(bScale);
+		ImageDN aScale = aBeforeScale.scale1(200,200);
+		
+		aScale.outputImage("afterScale","jpg");
 	}
 }
