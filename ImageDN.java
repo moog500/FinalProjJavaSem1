@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.image.*;
+import java.awt.geom.*;
 import javax.imageio.*;
 import java.io.*;
 import java.util.*;
@@ -105,6 +106,32 @@ public class ImageDN {
 		return img;
 	}
 	
+	/*Returns a scaled version of an image
+	@param input is the image to be scaled
+	@param newWidth is the new width of the image
+	@param newHeight is the new height of the image
+	*/
+	public static BufferedImage scale(BufferedImage input, int newWidth, int newHeight) {
+		int currentWidth = input.getWidth();
+		int currentHeight = input.getHeight();
+		
+		double scaleX = (double)newWidth/currentWidth;
+		double scaleY = (double)newHeight/currentHeight;
+		AffineTransform scale = AffineTransform.getScaleInstance(scaleX,scaleY);
+		AffineTransformOp scaleOp = new AffineTransformOp(scale,AffineTransformOp.TYPE_BILINEAR);
+		
+		return scaleOp.filter(input, new BufferedImage(newWidth,newHeight,input.getType()));
+	}
+	
+	/*Scales the image
+	@param newWidth is the new width of the image
+	@param newHeight is the new height of the image
+	*/
+	public ImageDN scale(int newWidth, int newHeight) {
+		ImageDN ret = new ImageDN(scale(img),newWidth,newHeight);
+		return ret;
+	}
+	
 	/*Applies the specified border to the image
 	@param applied is the border to be applied to the image
 	*/
@@ -177,6 +204,8 @@ public class ImageDN {
 			return toFix;
 		}
 	}
+	
+	
 
 	/*Creates a new file from the current, modified image with the specified name and extension
 	@param filename is the name of the file (without the extension)
