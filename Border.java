@@ -14,9 +14,7 @@ public class Border extends ImageDN {
 	super(brdr);
 	this.color = color;
 	borderPos = new ArrayList<Integer>();
-	int r;
-	int g;
-	int b;
+	int r,g,b;
 	for (int row = 0; row < getPixels().length; row++) {
 	    for (int col = 0; col < getPixels()[row].length; col++) {
 		r = getR(row,col);

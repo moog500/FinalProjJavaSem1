@@ -60,10 +60,7 @@ public class ImageDN {
 	/*Creates the pixelsARGB array
 	*/
 	public void toTYPE_INT_ARGB(){
-		int r;
-		int g;
-		int b;
-		int a;
+		int r,g,b,a;
 		for (int row = 0; row < maxY; row++){
 			for (int col = 0; col < maxX; col++){
 				r = getR(row,col);
@@ -186,10 +183,7 @@ public class ImageDN {
 		int posY;
 		int valX;
 		int valY;
-		int r;
-		int g;
-		int b;
-		int a;
+		int r,g,b,a;
 		Color c;
 		for (int i = 0; i < pos.size(); i+=2) {
 			posY = pos.get(i);
@@ -207,10 +201,7 @@ public class ImageDN {
 		int rChange = 0;
 		int gChange = 0;
 		int bChange = 0;
-		int r;
-		int g;
-		int b;
-		int a;
+		int r,g,b,a;
 		Color c;
 		if (mood.equals("happy")) {
 			rChange = 20;
@@ -240,27 +231,6 @@ public class ImageDN {
 		}
 	}
 	
-	/*Applies the specified transparency to the image from 0 (transparent) to 255 (opaque)
-	@param percentage is the transparency % from 0 to 100 to be applied
-	*/
-	public void applyTransparency(int percentage) {
-		int r;
-		int g;
-		int b;
-		int a;
-		Color c;
-		for (int row = 0; row < maxY; row++) {
-			for (int col = 0; col < maxX; col++) {
-				r = getR(row,col);
-				g = getG(row,col);
-				b = getB(row,col);
-				a = (int)(percentage*255.0/100.0);
-				c = new Color(r,g,b,a);
-				img.setRGB(col,row,c.getRGB());
-			}
-		}
-	}
-	
 	/*Takes any number that may be outside the (0,255) range and puts it back in that range
 	@param toFix is the number that needs to placed in the range
 	@return the new int in the range (0,255)
@@ -274,6 +244,47 @@ public class ImageDN {
 		}
 		else {
 			return toFix;
+		}
+	}
+	
+	/*Applies the specified transparency to the image from 0 (transparent) to 255 (opaque)
+	@param percentage is the transparency % from 0 to 100 to be applied
+	*/
+	public void applyTransparency(int percentage) {
+		int r,g,b,a;
+		Color c;
+		for (int row = 0; row < maxY; row++) {
+			for (int col = 0; col < maxX; col++) {
+				r = getR(row,col);
+				g = getG(row,col);
+				b = getB(row,col);
+				a = (int)(percentage*255.0/100.0);
+				c = new Color(r,g,b,a);
+				img.setRGB(col,row,c.getRGB());
+			}
+		}
+	}
+	
+	/*Applies a black and white filter to the image
+	*/
+	public void applyBlackWhite() {
+		int[] avg = new int[766];
+		for (int i = 0; i < avg.length; i++) {
+			avg[i] = (int)(i/3);
+		}
+		int r,g,b,a,newPx;
+		Color c;
+		for (int row = 0; row < maxY; row++) {
+			for (int col = 0; col < maxX; col++) {
+				r = getR(row,col);
+				g = getG(row,col);
+				b = getB(row,col);
+				a = getA(row,col);
+				c = new Color(r,g,b,a);
+				newPx = avg[r+g+b];
+				c = newColor(a,newPx,newPx,newPx);
+				img.setRGB(i,j,c.getRGB());
+			}
 		}
 	}
 
