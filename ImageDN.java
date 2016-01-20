@@ -280,9 +280,8 @@ public class ImageDN {
 				g = getG(row,col);
 				b = getB(row,col);
 				a = getA(row,col);
-				c = new Color(r,g,b,a);
 				newPx = avg[r+g+b];
-				c = new Color(a,newPx,newPx,newPx);
+				c = new Color(newPx,newPx,newPx,a);
 				img.setRGB(col,row,c.getRGB());
 			}
 		}
