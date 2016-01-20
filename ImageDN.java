@@ -283,7 +283,7 @@ public class ImageDN {
 				c = new Color(r,g,b,a);
 				newPx = avg[r+g+b];
 				c = new Color(a,newPx,newPx,newPx);
-				img.setRGB(row,col,c.getRGB());
+				img.setRGB(col,row,c.getRGB());
 			}
 		}
 	}

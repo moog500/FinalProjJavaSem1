@@ -65,7 +65,6 @@ public class Driver {
 				try {
 					bIn = ImageIO.read(new File(args[0]));
 					ImageDN in = new ImageDN(bIn);
-					
 					in.applyBlackWhite();
 					in.outputImage(args[2],args[3]);
 				}
