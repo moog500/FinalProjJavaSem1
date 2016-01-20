@@ -60,6 +60,19 @@ public class Driver {
 					System.out.println("Please read the README for instructions!");
 				}
 			}
+			//Black and White
+			else if (args[1].equals("bw")) {
+				try {
+					bIn = ImageIO.read(new File(args[0]));
+					ImageDN in = new ImageDN(bIn);
+					
+					in.applyBlackWhite();
+					in.outputImage(args[2],args[3]);
+				}
+				catch (Exception e) {
+					System.out.println("Please read the README for instructions!");
+				}
+			}
 		}
 		catch (Exception e) {
 			System.out.println("Please read the README for instructions!");
