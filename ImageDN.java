@@ -287,6 +287,24 @@ public class ImageDN {
 		}
 	}
 
+	public void applyGlass() {
+		Random rand = new Random();
+		int r,g,b,a;
+		Color c;
+		for (int row = 0; row < maxY; row++) {
+			for (int col = 0; col < maxX; col++) {
+				r = getR(row,col);
+				g = getG(row,col);
+				b = getB(row,col);
+				a = getA(row,col);
+				c = new Color(r,g,b,a);
+				if (row != 0 && row != maxY && col != 0 && col != maxX) {
+					img.setRGB(col+rand.nextInt(3)-1,row+rand.nextInt(3)-1,c.getRGB());
+				}
+			}
+		}
+	}
+
 	/*Creates a new file from the current, modified image with the specified name and extension
 	@param filename is the name of the file (without the extension)
 	@param extension is the extension to be used (without the period - e.g. jpg, png, etc)
