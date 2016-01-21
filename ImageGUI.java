@@ -16,10 +16,13 @@ public class ImageGUI extends JFrame{
     pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
 
     ImageDN img = new ImageDN(imtopen);
-
-
     ImageIcon img = new ImageIcon(img);
+    String[] mods = {"border", "mood"};
+    final JComboBox<String> cb = new JComboBox<String>(mods);
+
     pane.add(img);
+    pane.add(cb);
+    
 
 
 
