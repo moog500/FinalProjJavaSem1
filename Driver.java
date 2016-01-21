@@ -41,6 +41,8 @@ public class Driver {
 		if (filter.equals("border")) {
 			System.out.println("Choose a border (see the folder) or use your own by typing the filename, including extension:");
 			String border = input.next();
+			System.out.println("Type the color you would like the border to be (see the README for choices):");
+			String color = input.next();
 			System.out.println("Type the filename, excluding extension, that you would like to output the image to:");
 			String outputFilename = input.next();
 			System.out.println("Type the extension of the filename that you would like to output the image to:");
@@ -54,7 +56,7 @@ public class Driver {
 				ImageDN in = new ImageDN(bIn);
 				if ((brdr.getMaxX() != in.getMaxX()) || (brdr.getMaxY() != in.getMaxY())) {
 					ImageDN inBrdr2 = brdr.scale1(in.getMaxX(),in.getMaxY());
-					Border brdr2 = new Border(inBrdr2.getImage(),"000000000000");
+					Border brdr2 = new Border(inBrdr2.getImage(),color);
 					in.applyBorder(brdr2);
 				}
 				else {

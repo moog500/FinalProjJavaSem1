@@ -17,7 +17,7 @@ public class ImageDN {
 	/*Takes a BufferedImage to create an ImageDN that can be modified
 	@param img is the BufferedImage created in the Driver that will be converted to an ImageDN
 	*/
-	public ImageDN(BufferedImage img) {
+	public ImageDN(BufferedImage img) extends Image{
 		this.img = img;
 		maxX = img.getWidth();
 		maxY = img.getHeight();
@@ -184,13 +184,25 @@ public class ImageDN {
 		int valX;
 		int valY;
 		int r,g,b,a;
-		Color c;
+		Color c = Color.black;
 		for (int i = 0; i < pos.size(); i+=2) {
 			posY = pos.get(i);
 			posX = pos.get(i+1);
 			valY = (int)pos.get(i);
 			valX = (int)pos.get(i+1);
-			img.setRGB(posX,posY,applied.getImage().getRGB(valX,valY));
+			if (applied.color.equals("white")) {
+				c = Color.white;
+			}
+			if (applied.color.equals("red")) {
+				c = Color.red;
+			}
+			if (applied.color.equals("green")) {
+				c = Color.green;
+			}
+			if (applied.color.equals("blue")) {
+				c = Color.blue;
+			}
+			img.setRGB(posX,posY,c.getRGB());
 		}
 	}
 	
