@@ -32,11 +32,11 @@ Once you finish, a success message will print and your output file should be in 
 * Apply a glasslike filter to images
 
 ==========TO BE ADDED==========
-* Choose from predetermined borders instead of downloading from the internet
 * Apply transparency
 * Invert colors
 
 ==========CHANGELOG==========
 1/20/16
 Noah - Finished b/w filter, added glass filter, updated Driver to use input from terminal rather than one-line command
-
+1/21/16
+Noah - Finished coloring of borders, added a few borders to the folder that the user can use
