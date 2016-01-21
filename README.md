@@ -12,7 +12,7 @@ You will be prompted for certain items:
 -Filename (including extension) that you would like to filter
 As well as specifics for each filter:
 -Scale: x,y value you would like to scale to
--Border: check the folder for choices
+-Border: check the folder for choices, colors: black,white,red,green,blue
 -Mood: happy/sad/mad
 -Black & White: nothing
 -Glass: nothing
@@ -26,12 +26,12 @@ Once you finish, a success message will print and your output file should be in 
 * Automatically scale images if needed
 * Manually scale images
 * Apply black borders
+* Change the color of the border
 * Add different moods to images
 * Make images black and white
 * Apply a glasslike filter to images
 
 ==========TO BE ADDED==========
-* Change the color of the border
 * Choose from predetermined borders instead of downloading from the internet
 * Apply transparency
 * Invert colors
