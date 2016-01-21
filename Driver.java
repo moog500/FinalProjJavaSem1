@@ -50,7 +50,7 @@ public class Driver {
 			try {
 				bIn = ImageIO.read(new File(file));
 				bBrdr = ImageIO.read(new File(border));
-				brdr = new Border(bBrdr,"000000000000");
+				Border brdr = new Border(bBrdr,"000000000000");
 				ImageDN in = new ImageDN(bIn);
 				if ((brdr.getMaxX() != in.getMaxX()) || (brdr.getMaxY() != in.getMaxY())) {
 					ImageDN inBrdr2 = brdr.scale1(in.getMaxX(),in.getMaxY());
