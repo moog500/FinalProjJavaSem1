@@ -1,50 +1,34 @@
 ==========INSTRUCTIONS==========
-=====Scaling=====
 In your terminal, type:
 javac ImageDN.java
 javac Driver.java
-java Driver imageToBeScaled.extension s pixelsInXDirection pixelsInYDirection outputName outputExtension
-example:
-java Driver test.jpg s 200 200 testScale jpg
-will scale the image test.jpg to 200 wide by 200 tall and place it in a new image called testScale.jpg, leaving the original test.jpg untouched
-=====Borders=====
-In your terminal, type:
-javac ImageDN.java
-javac Driver.java
-java Driver imageToBeBordered.extension b Border.extension outputName outputExtension
-example:
-java Driver test.jpg b border.jpg testBorder jpg
-will add the border from border.jpg to test.jpg and place it in a new image called testBorder.jpg, leaving the original test.jpg untouched
-=====Moods=====
-In your terminal, type:
-javac ImageDN.java
-javac Driver.java
-java Driver imageToApplyMoodTo.extension m mood outputName outputExtension
-possible replacements for mood:
--happy (red)
--sad (blue)
--mad (green)
-example:
-java Driver test.jpg m happy testMood jpg
-will make the image "happier" by making it more red overall
-=====Black/White=====
-In your terminal, type:
-javac ImageDN.java
-javac Driver.java
-java Driver imageToApplyBWTo.extension bw outputName outputExtension
-example:
-java Driver test.jpg bw testBW jpg
-will convert test.jpg to all black and white
+java Driver
+
+You will be prompted for certain items:
+-Filter name (scale,border,mood,blackwhite,glass)
+-Filename (including extension) that you would like to filter
+As well as specifics for each filter:
+-Scale: x,y value you would like to scale to
+-Border: check the folder for choices
+-Mood: happy/sad/mad
+-Black & White: nothing
+-Glass: nothing
+And finally:
+-Output filename (without extension)
+-Output extension
+
+Once you finish, a success message will print and your output file should be in the folder.
 
 ==========FEATURES==========
 * Automatically scale images if needed
 * Manually scale images
 * Apply black borders
 * Add different moods to images
+* Make images black and white
+* Apply a glasslike filter to images
 
 ==========TO BE ADDED==========
 * Change the color of the border
 * Choose from predetermined borders instead of downloading from the internet
 * Apply transparency
-* Make images black and white
 * Invert colors
