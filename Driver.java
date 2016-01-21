@@ -72,6 +72,19 @@ public class Driver {
 					System.out.println("Please read the README for instructions!");
 				}
 			}
+			//Glass
+			else if (args[1].equals("g")) {
+				try {
+					bIn = ImageIO.read(new File(args[0]));
+					ImageDN in = new ImageDN(bIn);
+					in.applyGlass();
+					in.outputImage(args[2],args[3]);
+				}
+				catch (Exception e) {
+					System.out.println("Please read the README for instructions!");
+					e.printStackTrace();
+				}
+			}
 		}
 		catch (Exception e) {
 			System.out.println("Please read the README for instructions!");

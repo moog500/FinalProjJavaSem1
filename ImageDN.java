@@ -287,9 +287,11 @@ public class ImageDN {
 		}
 	}
 
+	/*Applies a glass-like filter to the image
+	*/
 	public void applyGlass() {
 		Random rand = new Random();
-		int r,g,b,a;
+		int r,g,b,a,addR,addC;
 		Color c;
 		for (int row = 0; row < maxY; row++) {
 			for (int col = 0; col < maxX; col++) {
@@ -298,8 +300,10 @@ public class ImageDN {
 				b = getB(row,col);
 				a = getA(row,col);
 				c = new Color(r,g,b,a);
-				if (row != 0 && row != maxY && col != 0 && col != maxX) {
-					img.setRGB(col+rand.nextInt(3)-1,row+rand.nextInt(3)-1,c.getRGB());
+				addR = rand.nextInt(3)-1;
+				addC = rand.nextInt(3)-1;
+				if (col+addC > 0 && col+addC < maxX && row+addR > 0 && row+addR < maxY) {
+					img.setRGB(col+addC,row+addR,c.getRGB());
 				}
 			}
 		}
@@ -318,94 +322,5 @@ public class ImageDN {
 		catch (IOException e) {
 			System.out.println("Input/Output error. Please check that you have entered the correct parameters and try again.");
 		}
-	}
-
-	public static void main(String[] args) {
-		//Testing Border
-		BufferedImage b = null;
-		try {
-			b = ImageIO.read(new File("whiteimage200x200.png"));
-		}
-		catch (IOException e) {
-			System.out.println("IOException1");
-		}
-		ImageDN a = new ImageDN(b);
-		
-		BufferedImage brdr = null;
-		Border test = null;
-		try {
-			brdr = ImageIO.read(new File("blackborder200x200.jpg"));
-		}
-		catch (IOException e) {
-			System.out.println("IOException2");
-		}
-		test = new Border(brdr, "000000000");
-		
-		a.applyBorder(test);
-		a.outputImage("whiteimageblackborder200x200","jpg");
-		
-		//Tesing Mood
-		//Happy
-		BufferedImage bHappy = null;
-		try {
-			bHappy = ImageIO.read(new File("test.jpg"));
-		}
-		catch (IOException e) {
-			System.out.println("IOException3");
-		}
-		ImageDN aHappy = new ImageDN(bHappy);
-		
-		aHappy.applyMood("happy");
-		aHappy.outputImage("happytest","jpg");
-		//Sad
-		BufferedImage bSad = null;
-		try {
-			bSad = ImageIO.read(new File("test.jpg"));
-		}
-		catch (IOException e) {
-			System.out.println("IOException4");
-		}
-		ImageDN aSad = new ImageDN(bSad);
-		
-		aSad.applyMood("sad");
-		aSad.outputImage("sadtest","jpg");
-		//Mad
-		BufferedImage bMad = null;
-		try {
-			bMad = ImageIO.read(new File("test.jpg"));
-		}
-		catch (IOException e) {
-			System.out.println("IOException5");
-		}
-		ImageDN aMad = new ImageDN(bMad);
-		
-		aMad.applyMood("mad");
-		aMad.outputImage("madtest","jpg");
-		
-		//Testing Scaling
-		BufferedImage bScale = null;
-		try {
-			bScale = ImageIO.read(new File("beforeScale.jpg"));
-		}
-		catch (IOException e) {
-			System.out.println("IOException6");
-		}
-		ImageDN aBeforeScale = new ImageDN(bScale);
-		ImageDN aScale = aBeforeScale.scale1(200,200);
-		
-		aScale.outputImage("afterScale","jpg");
-		
-		//Testing Transparency
-		BufferedImage bTransparency = null;
-		try {
-			bTransparency = ImageIO.read(new File("test.jpg"));
-		}
-		catch (IOException e) {
-			System.out.println("IOException6");
-		}
-		ImageDN aTransparency = new ImageDN(bTransparency);
-		
-		aTransparency.applyTransparency(0);
-		aTransparency.outputImage("transparencyTest","jpg");
 	}
 }
