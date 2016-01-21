@@ -8,86 +8,119 @@ import java.lang.*;
 
 public class Driver {
 	public static void main(String[] args) {
-		try {
-			BufferedImage bIn = null;
-			//Scaling
-			if (args[1].equals("s")) {
-				try {
-					bIn = ImageIO.read(new File(args[0]));
-					ImageDN in = new ImageDN(bIn);
-					
-					ImageDN out = in.scale1(Integer.parseInt(args[2]),Integer.parseInt(args[3]));
-					out.outputImage(args[4],args[5]);
-				}
-				catch (Exception e) {
-					System.out.println("Please read the README for instructions!");
-				}
+		BufferedImage bIn = null;
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Pick a filter (see the list in the README):");
+		String filter = input.next();
+		System.out.println("Type the filename, including extension, that you would like to filter:");
+		String file = input.next();
+		//Scale
+		if (filter.equals("scale")) {
+			System.out.println("Scale to X:");
+			String xScale = input.next();
+			System.out.println("Scale to Y:");
+			String yScale = input.next();
+			System.out.println("Type the filename, excluding extension, that you would like to output the image to:");
+			String outputFilename = input.next();
+			System.out.println("Type the extension of the filename that you would like to output the image to:");
+			String outputExtension = input.next();
+			try {
+				bIn = ImageIO.read(new File(file));
+				ImageDN in = new ImageDN(bIn);
+				
+				ImageDN out = in.scale1(Integer.parseInt(xScale),Integer.parseInt(yScale));
+				out.outputImage(outputFilename,outputExtension);
+				System.out.println("Check the folder for your output file!");
 			}
-			//Borders
-			else if (args[1].equals("b")) {
-				Border brdr = null;
-				BufferedImage bBrdr = null;
-				try {
-					bIn = ImageIO.read(new File(args[0]));
-					bBrdr = ImageIO.read(new File(args[2]));
-					brdr = new Border(bBrdr,"000000000000");
-					ImageDN in = new ImageDN(bIn);
-					if ((brdr.getMaxX() != in.getMaxX()) || (brdr.getMaxY() != in.getMaxY())) {
-						ImageDN inBrdr2 = brdr.scale1(in.getMaxX(),in.getMaxY());
-						Border brdr2 = new Border(inBrdr2.getImage(),"000000000000");
-						in.applyBorder(brdr2);
-					}
-					else {
-						in.applyBorder(brdr);
-					}
-					
-					in.outputImage(args[3],args[4]);
-				}
-				catch (Exception e) {
-					System.out.println("Please read the README for instructions!");
-				}
-			}
-			//Moods
-			else if (args[1].equals("m")) {
-				try {
-					bIn = ImageIO.read(new File(args[0]));
-					ImageDN in = new ImageDN(bIn);
-					
-					in.applyMood(args[2]);
-					in.outputImage(args[3],args[4]);
-				}
-				catch (Exception e) {
-					System.out.println("Please read the README for instructions!");
-				}
-			}
-			//Black and White
-			else if (args[1].equals("bw")) {
-				try {
-					bIn = ImageIO.read(new File(args[0]));
-					ImageDN in = new ImageDN(bIn);
-					in.applyBlackWhite();
-					in.outputImage(args[2],args[3]);
-				}
-				catch (Exception e) {
-					System.out.println("Please read the README for instructions!");
-				}
-			}
-			//Glass
-			else if (args[1].equals("g")) {
-				try {
-					bIn = ImageIO.read(new File(args[0]));
-					ImageDN in = new ImageDN(bIn);
-					in.applyGlass();
-					in.outputImage(args[2],args[3]);
-				}
-				catch (Exception e) {
-					System.out.println("Please read the README for instructions!");
-					e.printStackTrace();
-				}
+			catch (Exception e) {
+				System.out.println("Please read the README for instructions! Check to make sure you have entered everything correctly.");
 			}
 		}
-		catch (Exception e) {
-			System.out.println("Please read the README for instructions!");
+		//Border
+		if (filter.equals("border")) {
+			System.out.println("Choose a border (see the folder) or use your own by typing the filename, including extension:");
+			String border = input.next();
+			System.out.println("Type the filename, excluding extension, that you would like to output the image to:");
+			String outputFilename = input.next();
+			System.out.println("Type the extension of the filename that you would like to output the image to:");
+			String outputExtension = input.next();
+			
+			BufferedImage bBrdr = null;
+			try {
+				bIn = ImageIO.read(new File(file));
+				bBrdr = ImageIO.read(new File(border));
+				brdr = new Border(bBrdr,"000000000000");
+				ImageDN in = new ImageDN(bIn);
+				if ((brdr.getMaxX() != in.getMaxX()) || (brdr.getMaxY() != in.getMaxY())) {
+					ImageDN inBrdr2 = brdr.scale1(in.getMaxX(),in.getMaxY());
+					Border brdr2 = new Border(inBrdr2.getImage(),"000000000000");
+					in.applyBorder(brdr2);
+				}
+				else {
+					in.applyBorder(brdr);
+				}
+				
+				in.outputImage(outputFilename,outputExtension);
+				System.out.println("Check the folder for your output file!");
+			}
+			catch (Exception e) {
+				System.out.println("Please read the README for instructions! Check to make sure you have entered everything correctly.");
+			}
+		}
+		//Mood
+		if (filter.equals("mood")) {
+			System.out.println("Choose a mood (see the list in the README):");
+			String mood = input.next();
+			System.out.println("Type the filename, excluding extension, that you would like to output the image to:");
+			String outputFilename = input.next();
+			System.out.println("Type the extension of the filename that you would like to output the image to:");
+			String outputExtension = input.next();
+			try {
+				bIn = ImageIO.read(new File(file));
+				ImageDN in = new ImageDN(bIn);
+				
+				in.applyMood(mood);
+				in.outputImage(outputFilename,outputExtension);
+				System.out.println("Check the folder for your output file!");
+			}
+			catch (Exception e) {
+				System.out.println("Please read the README for instructions! Check to make sure you have entered everything correctly.");
+			}
+		}
+		//Black & White
+		if (filter.equals("blackwhite")) {
+			System.out.println("Type the filename, excluding extension, that you would like to output the image to:");
+			String outputFilename = input.next();
+			System.out.println("Type the extension of the filename that you would like to output the image to:");
+			String outputExtension = input.next();
+			try {
+				bIn = ImageIO.read(new File(file));
+				ImageDN in = new ImageDN(bIn);
+				in.applyBlackWhite();
+				in.outputImage(outputFilename,outputExtension);
+				System.out.println("Check the folder for your output file!");
+			}
+			catch (Exception e) {
+				System.out.println("Please read the README for instructions! Check to make sure you have entered everything correctly.");
+			}
+		}
+		//Glass
+		if (filter.equals("glass")) {
+			System.out.println("Type the filename, excluding extension, that you would like to output the image to:");
+			String outputFilename = input.next();
+			System.out.println("Type the extension of the filename that you would like to output the image to:");
+			String outputExtension = input.next();
+			try {
+				bIn = ImageIO.read(new File(file));
+				ImageDN in = new ImageDN(bIn);
+				in.applyGlass();
+				in.outputImage(outputFilename,outputExtension);
+				System.out.println("Check the folder for your output file!");
+			}
+			catch (Exception e) {
+				System.out.println("Please read the README for instructions! Check to make sure you have entered everything correctly.");
+			}
 		}
 	}
 }
