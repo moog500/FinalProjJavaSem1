@@ -7,9 +7,19 @@ import java.io.*;
 import java.util.*;
 import java.lang.*;
 
-public class ImageGUI extends JFrame{
+public class ImageGUI extends JFrame implements ActionListener{
     private BufferedImage imtopen;
     private Container pane; 
+
+    public void actionPerformed(ActionEvent e){
+        String event = e.getActionCommand();
+        if(event.equals("Select")){
+            if (but.getSelectedItem().equals("filter")){
+                ImageDN img = new ImageDN(imtopen);
+                img = img.applyBlackWhite();
+                pane.add(new JLabel(img));
+            }
+    }}
 
     public ImageGUI() {
     this.setTitle("Image Editing GUI");
@@ -20,16 +30,21 @@ public class ImageGUI extends JFrame{
 
     pane = this.getContentPane();
     pane.setLayout(new BoxLayout(pane, BoxLayout.X_AXIS));
-
+    
     ImageIcon img1 = new ImageIcon("test.jpg");
-    String[] mods = {"border", "mood"};
+    String[] mods = {"filter", "mood"};
     JComboBox<String> cb = new JComboBox<String>(mods);
     JButton but = new JButton("Select");
     cb.setSize(50,100);
 
+    but.addActionListener(this);
+    but.setActionCommand("Select");
     pane.add(cb);
     pane.add(but);
-    pane.add(new JLabel(img1));}
+    pane.add(new JLabel(img1));
+
+
+    }
 
     public static void main(String[] args){
         ImageGUI Test = new ImageGUI();
