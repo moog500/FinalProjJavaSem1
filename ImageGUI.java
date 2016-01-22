@@ -10,11 +10,17 @@ import java.lang.*;
 
 public class ImageGUI extends JFrame implements ActionListener{
     private BufferedImage imtopen = null;
-    private Container pane; 
+    private Container pane;
+    private String[] mods = {"filter", "mood", "border"};
+    private String[] filters = {"b/w", "glass"};
+    private String[] moods = {"happy", "sad", "mad"};
     private JComboBox<String> cb;
+    private JComboBox<String> filterlist;
+    private JComboBox<String> moodlist;
     private String cur;
     private ImageIcon img1;
     private JLabel aimg1;
+    
 
     public void actionPerformed(ActionEvent e){
         String event = e.getActionCommand();
@@ -46,7 +52,6 @@ public class ImageGUI extends JFrame implements ActionListener{
     pane.setLayout(new BoxLayout(pane, BoxLayout.X_AXIS));
     
     img1 = new ImageIcon("test.jpg");
-    String[] mods = {"filter", "mood"};
     cb = new JComboBox<String>(mods);
     cur = (String)cb.getSelectedItem();
     JButton but = new JButton("Select");
