@@ -40,3 +40,9 @@ Once you finish, a success message will print and your output file should be in 
 Noah - Finished b/w filter, added glass filter, updated Driver to use input from terminal rather than one-line command
 1/21/16
 Noah - Finished coloring of borders, added a few borders to the folder that the user can use
+1/22/16
+Noah - Worked on transparency - still not working
+
+==========KNOWN BUGS==========
+* Transparency does not actually change the transparency of the image
+* Border sometimes does not fully apply itself
