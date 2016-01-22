@@ -124,5 +124,24 @@ public class Driver {
 				System.out.println("Please read the README for instructions! Check to make sure you have entered everything correctly.");
 			}
 		}
+		//Transparency
+		if (filter.equals("transparency")) {
+			System.out.println("Type the percentage of transparency from 0 (transparent) to 100 (opaque) you would like to apply");
+			String percentage = input.next();
+			System.out.println("Type the filename, excluding extension, that you would like to output the image to:");
+			String outputFilename = input.next();
+			System.out.println("Type the extension of the filename that you would like to output the image to:");
+			String outputExtension = input.next();
+			try {
+				bIn = ImageIO.read(new File(file));
+				ImageDN in = new ImageDN(bIn);
+				in.applyTransparency(Integer.parseInt(percentage));
+				in.outputImage(outputFilename,outputExtension);
+				System.out.println("Check the folder for your output file!");
+			}
+			catch (Exception e) {
+				System.out.println("Please read the README for instructions! Check to make sure you have entered everything correctly.");
+			}
+		}
 	}
 }
