@@ -21,12 +21,15 @@ public class ImageGUI extends JFrame{
     pane = this.getContentPane();
     pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
 
-    ImageDN img = new ImageDN(imtopen);
-    ImageIcon img1 = new ImageIcon(img);
+    ImageIcon img1 = new ImageIcon("test.jpg");
     String[] mods = {"border", "mood"};
     final JComboBox<String> cb = new JComboBox<String>(mods);
 
-    pane.add(img);
-    pane.add(cb);
+    pane.add(cb);}
+
+    public static void main(String[] args){
+        ImageGUI Test = new ImageGUI();
+        Test.setVisible(true);
     }
+    
 }
