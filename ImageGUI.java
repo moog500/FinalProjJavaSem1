@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.image.*;
 import java.awt.geom.*;
 import javax.imageio.*;
@@ -14,7 +15,7 @@ public class ImageGUI extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e){
         String event = e.getActionCommand();
         if(event.equals("Select")){
-            if (but.getSelectedItem().equals("filter")){
+            if (cb.getSelectedItem().equals("filter")){
                 ImageDN img = new ImageDN(imtopen);
                 img = img.applyBlackWhite();
                 pane.add(new JLabel(img));
