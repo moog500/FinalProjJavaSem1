@@ -9,16 +9,29 @@ import java.util.*;
 import java.lang.*;
 
 public class ImageGUI extends JFrame implements ActionListener{
-    private BufferedImage imtopen;
+    private BufferedImage imtopen = null;
     private Container pane; 
+    private JComboBox<String> cb;
+    private String cur;
+    private ImageIcon img1;
+    private JLabel aimg1;
 
     public void actionPerformed(ActionEvent e){
         String event = e.getActionCommand();
+        try {
+            imtopen = ImageIO.read(new File("test.jpg"));
+        }
+        catch (IOException ex) {
+            System.out.println("IOException");
+        }
         if(event.equals("Select")){
-            if (cb.getSelectedItem().equals("filter")){
+            if (cur.equals("filter")){
                 ImageDN img = new ImageDN(imtopen);
-                img = img.applyBlackWhite();
-                pane.add(new JLabel(img));
+                img.applyBlackWhite();
+                img.outputImage("currentOutput","jpg");
+                ImageIcon img2 = new ImageIcon("currentOutput.jpg");
+                aimg1.setIcon(null);
+                pane.add(new JLabel(img2));
             }
     }}
 
@@ -32,17 +45,19 @@ public class ImageGUI extends JFrame implements ActionListener{
     pane = this.getContentPane();
     pane.setLayout(new BoxLayout(pane, BoxLayout.X_AXIS));
     
-    ImageIcon img1 = new ImageIcon("test.jpg");
+    img1 = new ImageIcon("test.jpg");
     String[] mods = {"filter", "mood"};
-    JComboBox<String> cb = new JComboBox<String>(mods);
+    cb = new JComboBox<String>(mods);
+    cur = (String)cb.getSelectedItem();
     JButton but = new JButton("Select");
     cb.setSize(50,100);
+    aimg1 = new JLabel(img1);
 
     but.addActionListener(this);
     but.setActionCommand("Select");
     pane.add(cb);
     pane.add(but);
-    pane.add(new JLabel(img1));
+    pane.add(aimg1);
 
 
     }
