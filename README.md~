@@ -32,7 +32,7 @@ Once you finish, a success message will print and your output file should be in 
 * Apply a glasslike filter to images
 
 ==========TO BE ADDED==========
-* Apply transparency
+* Apply transparency (in code but does not modify alpha)
 * Invert colors
 
 ==========CHANGELOG==========

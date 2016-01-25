@@ -1,0 +1,144 @@
+import java.awt.*;
+import java.awt.image.*;
+import java.awt.geom.*;
+import javax.imageio.*;
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+public class Driver {
+	public static void main(String[] args) {
+		BufferedImage bIn = null;
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Pick a filter (see the list in the README):");
+		String filter = input.next();
+		System.out.println("Type the filename, including extension, that you would like to filter:");
+		String file = input.next();
+		//Scale
+		if (filter.equals("scale")) {
+			System.out.println("Scale to X:");
+			String xScale = input.next();
+			System.out.println("Scale to Y:");
+			String yScale = input.next();
+			System.out.println("Type the filename, excluding extension, that you would like to output the image to:");
+			String outputFilename = input.next();
+			System.out.println("Type the extension of the filename that you would like to output the image to:");
+			String outputExtension = input.next();
+			try {
+				bIn = ImageIO.read(new File(file));
+				ImageDN in = new ImageDN(bIn);
+				
+				ImageDN out = in.scale1(Integer.parseInt(xScale),Integer.parseInt(yScale));
+				out.outputImage(outputFilename,outputExtension);
+				System.out.println("Check the folder for your output file!");
+			}
+			catch (Exception e) {
+				System.out.println("Please read the README for instructions! Check to make sure you have entered everything correctly.");
+			}
+		}
+		//Border
+		if (filter.equals("border")) {
+			System.out.println("Choose a border (see the folder) or use your own by typing the filename, including extension:");
+			String border = input.next();
+			System.out.println("Type the color you would like the border to be (see the README for choices):");
+			String color = input.next();
+			System.out.println("Type the filename, excluding extension, that you would like to output the image to:");
+			String outputFilename = input.next();
+			System.out.println("Type the extension of the filename that you would like to output the image to:");
+			String outputExtension = input.next();
+			
+			BufferedImage bBrdr = null;
+			try {
+				bIn = ImageIO.read(new File(file));
+				bBrdr = ImageIO.read(new File(border));
+				Border brdr = new Border(bBrdr,"000000000000");
+				ImageDN in = new ImageDN(bIn);
+				if ((brdr.getMaxX() != in.getMaxX()) || (brdr.getMaxY() != in.getMaxY())) {
+					ImageDN inBrdr2 = brdr.scale1(in.getMaxX(),in.getMaxY());
+					Border brdr2 = new Border(inBrdr2.getImage(),color);
+					in.applyBorder(brdr2);
+				}
+				else {
+					in.applyBorder(brdr);
+				}
+				
+				in.outputImage(outputFilename,outputExtension);
+				System.out.println("Check the folder for your output file!");
+			}
+			catch (Exception e) {
+				System.out.println("Please read the README for instructions! Check to make sure you have entered everything correctly.");
+			}
+		}
+		//Mood
+		if (filter.equals("mood")) {
+			System.out.println("Choose a mood (see the list in the README):");
+			String mood = input.next();
+			System.out.println("Type the filename, excluding extension, that you would like to output the image to:");
+			String outputFilename = input.next();
+			System.out.println("Type the extension of the filename that you would like to output the image to:");
+			String outputExtension = input.next();
+			try {
+				bIn = ImageIO.read(new File(file));
+				ImageDN in = new ImageDN(bIn);
+				
+				in.applyMood(mood);
+				in.outputImage(outputFilename,outputExtension);
+				System.out.println("Check the folder for your output file!");
+			}
+			catch (Exception e) {
+				System.out.println("Please read the README for instructions! Check to make sure you have entered everything correctly.");
+			}
+		}
+		//Black & White
+		if (filter.equals("blackwhite")) {
+			System.out.println("Type the filename, excluding extension, that you would like to output the image to:");
+			String outputFilename = input.next();
+			System.out.println("Type the extension of the filename that you would like to output the image to:");
+			String outputExtension = input.next();
+			try {
+				bIn = ImageIO.read(new File(file));
+				ImageDN in = new ImageDN(bIn);
+				in.applyBlackWhite();
+				in.outputImage(outputFilename,outputExtension);
+				System.out.println("Check the folder for your output file!");
+			}
+			catch (Exception e) {
+				System.out.println("Please read the README for instructions! Check to make sure you have entered everything correctly.");
+			}
+		}
+		//Glass
+		if (filter.equals("glass")) {
+			System.out.println("Type the filename, excluding extension, that you would like to output the image to:");
+			String outputFilename = input.next();
+			System.out.println("Type the extension of the filename that you would like to output the image to:");
+			String outputExtension = input.next();
+			try {
+				bIn = ImageIO.read(new File(file));
+				ImageDN in = new ImageDN(bIn);
+				in.applyGlass();
+				in.outputImage(outputFilename,outputExtension);
+				System.out.println("Check the folder for your output file!");
+			}
+			catch (Exception e) {
+				System.out.println("Please read the README for instructions! Check to make sure you have entered everything correctly.");
+			}
+		}
+		//Transparency
+		if (filter.equals("transparency")) {
+			System.out.println("Type the percentage of transparency from 0 (transparent) to 100 (opaque) you would like to apply");
+			String percentage = input.next();
+			System.out.println("Type the filename, excluding extension, that you would like to output the image to:");
+			String outputFilename = input.next();
+			System.out.println("Type the extension of the filename that you would like to output the image to:");
+			String outputExtension = input.next();
+			try {
+				bIn = ImageIO.read(new File(file));
+				ImageDN in = new ImageDN(bIn);
+				in.applyTransparency(Integer.parseInt(percentage));
+				in.outputImage(outputFilename,outputExtension);
+				System.out.println("Check the folder for your output file!");
+			}
+		}
+	}
+}
