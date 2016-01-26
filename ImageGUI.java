@@ -37,6 +37,13 @@ public class ImageGUI extends JFrame {
 		this.setLocation(100,100);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
+		try {
+			imtopen = ImageIO.read(new File("test.jpg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		pane = this.getContentPane();
 		pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
 
@@ -97,25 +104,10 @@ public class ImageGUI extends JFrame {
 			String filterSelected = (String)cb.getSelectedItem();
 			System.out.println("Filter option selected: " + filterSelected);
 			if("glass".equals(filterSelected)) {
-		        try {
-		            imtopen = ImageIO.read(new File("test.jpg"));
-		        }
-		        catch (IOException ex) {
-		            System.out.println("IOException");
-		        }
 				ImageDN img = new ImageDN(imtopen);
                 img.applyGlass();
                 img.outputImage("currentOutput","jpg");
-              
-                
-             
 			} else if("b/w".equals(filterSelected)) {
-		        try {
-		            imtopen = ImageIO.read(new File("test.jpg"));
-		        }
-		        catch (IOException ex) {
-		            System.out.println("IOException");
-		        }
 				ImageDN img = new ImageDN(imtopen);
                 img.applyBlackWhite();
                 img.outputImage("currentOutput","jpg");
@@ -135,45 +127,22 @@ public class ImageGUI extends JFrame {
 			System.out.println("Mood option selected: " + moodSelected);
 			
 			if("happy".equals(moodSelected)) {
-		        try {
-		            imtopen = ImageIO.read(new File("test.jpg"));
-		        }
-		        catch (IOException ex) {
-		            System.out.println("IOException");
-		        }
 				ImageDN img = new ImageDN(imtopen);
                 img.applyMood("happy");
                 img.outputImage("currentOutput","jpg");
-                
-                
-                
 			} else if("sad".equals(moodSelected)) {
-				try {
-		            imtopen = ImageIO.read(new File("test.jpg"));
-		        }
-		        catch (IOException ex) {
-		            System.out.println("IOException");
-		        }
 				ImageDN img = new ImageDN(imtopen);
                 img.applyMood("sad");
                 img.outputImage("currentOutput","jpg");
-				
 			} else {
-				try {
-		            imtopen = ImageIO.read(new File("test.jpg"));
-		        }
-		        catch (IOException ex) {
-		            System.out.println("IOException");
-		        }
 				ImageDN img = new ImageDN(imtopen);
                 img.applyMood("mad");
-                img.outputImage("currentOutput","jpg");
-				
+                img.outputImage("currentOutput","jpg");				
 			}
 		}		
 	}
 
-	class BorderSelectionListener implements ActionListener {
+class BorderSelectionListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -184,18 +153,35 @@ public class ImageGUI extends JFrame {
 			String borderSelected = (String)cb.getSelectedItem();
 			System.out.println("Border option selected: " + borderSelected);
 			if("border1".equals(borderSelected)) {
-				try {
-		            imtopen = ImageIO.read(new File("test.jpg"));
-		        }
-		        catch (IOException ex) {
-		            System.out.println("IOException");
-		        }
 				ImageDN img = new ImageDN(imtopen);
-                img.applyBorder(new Border("border1"));
+                try {
+					img.applyBorder(new Border(ImageIO.read(new File("border0.jpg")), "red"));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                img.outputImage("currentOutput","jpg");
+			} else if("border2".equals(borderSelected)) {
+				ImageDN img = new ImageDN(imtopen);
+                try {
+					img.applyBorder(new Border(ImageIO.read(new File("border1.jpg")), "red"));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                img.outputImage("currentOutput","jpg");
+			} else if("border2".equals(borderSelected)) {
+				ImageDN img = new ImageDN(imtopen);
+                try {
+					img.applyBorder(new Border(ImageIO.read(new File("border2.jpg")), "red"));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
                 img.outputImage("currentOutput","jpg");
 			}
 		}		
-	}
+	} 
 
 	class RadioListener implements ActionListener, //only one event type needed
 	ChangeListener, //for curiosity only
@@ -232,7 +218,7 @@ public class ImageGUI extends JFrame {
 			} 
 			pane.add(menuSelected);
 			menuSelected.setEnabled(true);
-			aimg1.setIcon(null);
+			//aimg1.setIcon(null);
 		}
 
 		public void itemStateChanged(ItemEvent e) {
